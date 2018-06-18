@@ -16,16 +16,23 @@ public class InputManager : MonoBehaviour {
 
     #endregion
 
+    private void Awake()
+    {
+    }
+
     // Use this for initialization
     void Start () {
+
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+
         //temos q ir buscar os toques no update do input manager, é codigo mais correcto do que ficar no Game Manager
         //para isso a variavel touches tem que ser publica pq precisamos de ir buscar a informação
-        
-        touchesInAFrame = GetTouchesOnScreen();
+
+        if (IsTouchingOnScreen()) touchesInAFrame = GetTouchesOnScreen();
+        else touchesInAFrame = null;
 
     }
 
@@ -34,5 +41,13 @@ public class InputManager : MonoBehaviour {
     public Touch[] GetTouchesOnScreen()
     {
         return Input.touches;
+    }
+
+    //confirma se esta a haver toques no touchscreen
+    public bool IsTouchingOnScreen()
+    {
+        if (Input.touchCount > 0) return true;
+
+        return false;
     }
 }
